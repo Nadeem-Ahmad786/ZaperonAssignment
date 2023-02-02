@@ -55,4 +55,10 @@ exports.getUserDetails = catchAsyncErrors(async(req,res,next)=>{
 });
 
 
+//logout
 
+exports.logout = catchAsyncErrors(async(req,res,next)=>{
+    console.log("nadeem")
+    res.clearCookie("token");
+    return res.status(200).send("user logout")
+})

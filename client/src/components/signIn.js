@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import {AiOutlineEyeInvisible, AiOutlineEye} from "react-icons/ai";
-import {signin, isToken} from "../api/auth";
+import {signin, isToken, logout} from "../api/auth";
 
 function SignIn(){
     const [email, setEmail] = useState("");
@@ -17,6 +17,17 @@ function SignIn(){
         .then(response => {
             setSucess(true);
             setUserName(response.data.user.name);
+            setPassword("")
+        })
+    }
+    const handleLogout=()=>{
+        logout()
+        .then(response=>{
+            setSucess(false);
+            setLoader(false);
+        })
+        .catch(error=>{
+            console.log(error.data.err)
         })
     }
     const handleEmailChange=(e)=>{
@@ -52,6 +63,8 @@ function SignIn(){
             <img className="user-image" src='images/ic_user.svg' alt="user icon" width="60%"/>
             </div>
             <h1 className="welcome">Welcome!{success ? ", "+ userName :  ""}</h1>
+            {success &&  <button type="button" className="button" onClick={handleLogout} style={{width: "15%"}}>Logout</button>}
+
             {!success &&<><div className="intro">
                 <p>Let's connect to your workspace.<br />Please enter your credentials to continue.</p>
             </div>

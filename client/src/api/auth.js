@@ -21,3 +21,13 @@ export const isToken = async()=>{
     const response = await axios.get('/api/v1/checkToken', config);
     return response
 }
+export const logout = async()=>{
+    const config = {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json'
+        },    
+    };
+    const response = await axios.get('/api/v1/logout', config);
+    return response
+}
